@@ -7,11 +7,11 @@
 }
 
 html {
-    font-size: 60;
+    font-size: 62.5%;
 }
 
 body{
     font-family:'Courier New', Courier, monospace;
-  background-color: var(--rosa);  
-  color: var(--rosa-escu);
+  background-color: var(--roxo-escuro);  
+  color: var(--rosa);
 }

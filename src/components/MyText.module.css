@@ -1,0 +1,23 @@
+.container{
+    margin: 0 auto;
+    max-width: 80rem;
+}
+
+.div {
+    background-color: var(--roxo-claro);
+    box-shadow: 0 0 1rem var(--rosa);
+    margin: 3rem 5rem;
+    padding: 3rem;
+    border-radius: 2rem;
+}
+
+.title {
+    font-weight: bolder;
+    font-size: 4rem;
+    color: var(--lilas);
+    margin-bottom: 2rem;
+}
+
+.text {
+    font-size: 2rem;
+}
