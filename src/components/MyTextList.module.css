@@ -1,0 +1,13 @@
+.container {
+    padding:3rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:3rem;
+
+/* eixo HORIZONTAL */
+justify-content: space-around;
+align-items: center;
+align-content: center;
+    
+}
