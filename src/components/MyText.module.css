@@ -1,14 +1,14 @@
-.container{
+.container {
     /* margin: 0 auto; */
-    max-width: 20rem;
+    max-width: 50rem;
 }
 
 .div {
     height: 20rem;
-    width: 40rem;
-    background-color: var(--roxo-claro);
-    box-shadow: 0 0 1rem var(--rosa);
-    margin: 3rem 5rem;
+    width: 30rem;
+    background-color: var(--lilas);
+    box-shadow: 0 0 3rem var(--rosa);
+    /* margin: 3rem 5rem; */
     padding: 3rem;
     border-radius: 2rem;
 }
@@ -16,7 +16,8 @@
 .title {
     font-weight: bolder;
     font-size: 4rem;
-    color: var(--lilas);
+    color: var(--roxo);
+    text-align: center;
     margin-bottom: 2rem;
 }
 

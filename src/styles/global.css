@@ -13,5 +13,5 @@ html {
 body{
     font-family:'Courier New', Courier, monospace;
   background-color: var(--roxo-escuro);  
-  color: var(--rosa);
+  color: var(--roxo-claro);
 }
