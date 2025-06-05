@@ -38,12 +38,15 @@ export function MyTextList() {
   ];
 
   return (
+    <div>
+      <h1 className={styles.title}> MEUS TEXTOS </h1>
     <div className={styles.container}>
       {texts.map((text, index) => (
         <MyText key={index} title={`${index + 1}. ${text.title}`}>
           {text.text}
         </MyText>
       ))}
+    </div>
     </div>
   );
 }

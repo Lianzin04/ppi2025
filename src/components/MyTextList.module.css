@@ -12,3 +12,20 @@
     align-items: center; /* flex-start flex-end center baseline stretch */
     align-content: center; /* flex-start flex-end center baseline stretch */
 }
+
+.title {
+    font-weight: bolder;
+    font-size: 10rem;
+    text-align: center;
+
+    @media (max-width:1200px) {
+        font-flow: 4rem;
+
+
+    @media (max-width:768px) {
+        font-size: 3rem;
+  
+    }
+
+    }
+}

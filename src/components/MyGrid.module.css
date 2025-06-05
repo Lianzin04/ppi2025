@@ -1,0 +1,47 @@
+.grid {
+    padding: 3rem;
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, 1fr);
+
+}
+
+.card{
+    height: 30rem;
+    background-color:(r);
+    color: var();
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0.5rem  0.5rem 1rem;
+    font-size: 3rem;
+    text-align: center;
+
+}
+
+.container {
+    display: grid;
+
+    grid-template-areas:
+    "header1 header1"
+    "aside header2"
+    "aside main"
+    "footer footer";
+
+    grid-template-columns: 30rem;
+
+
+
+
+    
+}
+
+.header1 {
+    grid-area:header1;
+    background-color: rgb(62, 249, 255);
+}
+
+.header2 {
+      grid-area:header2;
+    background-color: rgb(0, 136, 91);   
+}
+

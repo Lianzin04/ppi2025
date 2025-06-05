@@ -1,6 +1,11 @@
 .container {
     /* margin: 0 auto; */
-    max-width: 50rem;
+    width: 30rem;
+
+    @media (max-width:768px) {
+        width: 80%;
+        
+    }
 }
 
 .div {
@@ -19,6 +24,10 @@
     color: var(--roxo);
     text-align: center;
     margin-bottom: 2rem;
+
+    @media (max-width:768px) {
+        font-size: 2rem; 
+    }
 }
 
 .text {
