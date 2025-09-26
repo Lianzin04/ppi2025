@@ -1,8 +1,4 @@
 class Cliente:
-    def __init__(self, nome, cpf, ala, pix):
+    def __init__(self, nome, cpf):
         self.nome = nome
         self.cpf = cpf
-        self.ala = ala
-        self.pix = pix
-
-    
