@@ -1,21 +1,75 @@
 ## Programação com Acesso a Banco de Dados
 # Revisão de Orientação a Objetos
 # Prof. Guilherme Leal Santos
+#classes com hierarquia 10/10/2025
+#herença e renscrita de metodos. 10/10/2025
 
-# aula 26/08 - gaegacao, composição, modificadores de acesso
-# Aula 19/09 - Orientação a Objetos
 from conta import Conta
 from cliente import Cliente
+from funcionario.funcionario import Funcionario
+from funcionario.gerente import Gerente
 
-cliente1 = Cliente('Elvis Presley', '111.222.333-44')
-conta1 = Conta(cliente1, 1, 123, 'elvis@gmail.com', 1000)
+# Aula 26/09 - Agregação, Composição, Modificadores de Acesso
+
+cliente1 = Cliente("Elvis Presley", "111.222.333-44")
+conta1 = Conta(cliente1, 1, 123, "elvis@gmail.com", 10000)
+print(Conta.total_contas())
+
+cliente2 = Cliente("Jonhny Cage", "222.333.444-55")
+conta2 = Conta(cliente2, 2, 234, "jonhnny@outlook.com", 5000)
+print(Conta.total_contas())
+
+print(Conta.lista_contas()[0].saldo)
+print(Conta.lista_contas()[1].saldo)
+print(Conta.get_saldo_total())
+
+print(Conta.total_contas_cm())
+
+f = Funcionario("Val", "333.444.555-66", 5000)
+f.hobby = "Ler fanfic"
+print(f.hobby)
+
+g = Gerente("Joã maria", "444.555.666-77", 7000)
+f.hobby = "Jogar kenshi"
+print(g.hobby)
+
+
+
+
+"""
 conta1.extrato()
 conta1.saca(500)
 conta1.deposita(300)
+"""
 
-if conta1.transfere(conta1, 8348784736598):
-    
+"""
+conta2.extrato()
+conta2.saca(100)
+conta2.deposita(600)
 
+conta1.transfere(conta2, 2000)
+conta2.saca(10000)
+
+conta1.historico.imprime()
+conta2.historico.imprime()
+
+# sem decorator
+conta1.set_saldo(-100)
+print(conta1.get_saldo()) #getter
+print(conta1.get_saldo()*1.1 + conta2.get_saldo()*0.9)
+
+# com decorator
+conta1.saldo = -100
+print(conta1.saldo) #getter
+print(conta1.saldo*1.1 + conta2.saldo*0.9)
+"""
+
+# Aula 19/09 - Orientação a Objetos
+
+"""
+cliente1 = Cliente('Elvis Presley', '111.222.333-44')
+conta1 = Conta(cliente1, 1, 123, 'elvis@gmail.com', 12345678)
+conta1.extrato()
 # conta1.deposita(100)
 # conta1.extrato()
 
@@ -31,18 +85,17 @@ if conta1.transfere(conta1, 8348784736598):
 #     print('Tá Liso')
 
 cliente2 = Cliente('Jonhny Cage', '222.333.444-55')
-conta2 = Conta(cliente2, 2, 234, 'jonhnny@outlook.com', 25000)
+conta2 = Conta(cliente2, 2, 234, 'jonhnny@outlook.com', 234567)
 conta2.extrato()
-conta2.saca(500)
-conta2.deposita(300)
 
 if(conta2.transfere(conta1, 1000)):
     print('OK')
 else:
     print('Tá liso')
 
+"""
 
-'''
+"""
 # Aula 12/092023 - Listas e Funções Lambda
 frutas = ['Maçã', 'Banana', 'Laranja']
 print(frutas)
@@ -96,4 +149,4 @@ from functools import reduce
 
 soma = reduce(lambda soma, n: soma + n, numeros)
 print(soma)
-'''
+"""

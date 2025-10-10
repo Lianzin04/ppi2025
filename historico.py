@@ -1,12 +1,13 @@
-import datetime   #pegar data da craicção
+import datetime
 
 class Historico:
-    def __init__(self):
-      self.data_abertura = datetime.datetime.today()
-      self.trasacoes = [] #lista de transações
+  def __init__(self):
+    self.data_abertura = datetime.datetime.today()
+    self.transacoes = []
 
-    def imprime(self):
-      print(f'Data abertura: {self.data_abertura}')
-      print('trasaco:')
-      for t in self.trasacoes:
-         print('-', t)
+  def imprime(self):
+    print(f'Data de abertura: {self.data_abertura}')
+    print('Transações:')
+    for t in self.transacoes:
+      print('-', t)
+    print('-----------------------------------')
