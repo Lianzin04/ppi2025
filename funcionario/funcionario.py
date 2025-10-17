@@ -23,6 +23,7 @@ class Funcionario:
         @property  
         def cpf(self):  
             return self._cpf
+        
         @cpf.setter
         def cpf(self, cpf):
             self._cpf = cpf
@@ -30,6 +31,7 @@ class Funcionario:
         @property
         def salario(self):
             return self._salario
+        
         @salario.setter
         def salario(self, salario):
             self._salario = salario

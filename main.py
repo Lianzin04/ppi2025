@@ -6,8 +6,11 @@
 
 from conta import Conta
 from cliente import Cliente
+from empresa.config.database import SupabaseConnection
 from funcionario.funcionario import Funcionario
 from funcionario.gerente import Gerente
+
+
 
 # Aula 26/09 - Agregação, Composição, Modificadores de Acesso
 
@@ -29,9 +32,12 @@ f = Funcionario("Val", "333.444.555-66", 5000)
 f.hobby = "Ler fanfic"
 print(f.hobby)
 
-g = Gerente("Joã maria", "444.555.666-77", 7000)
+g = Gerente("Joã maria", "444.555.666-77", 7000, 1234, 5)
 f.hobby = "Jogar kenshi"
-print(g.hobby)
+print(f.hobby)
+
+connection = SupabaseConnection()
+client = connection._client
 
 
 
