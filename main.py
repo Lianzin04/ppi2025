@@ -8,12 +8,19 @@
 from conta import Conta
 from cliente import Cliente
 from empresa.config.database import SupabaseConnection
+from empresa.dao.funcionario_dao import FuncionarioDAO
 from funcionario.funcionario import Funcionario
 from funcionario.gerente import Gerente
 
 from empresa.config.database import SupabaseConnection
 
-client = SupabaseConnection().client
+client = SupabaseConnection()._client
+
+#Criando o DAO para acessar a tabela funcionario
+funcionario_dao = FuncionarioDAO(client)
+
+for funcionario in funcionario_dao.read_all():
+    print(funcionario)
 
 
 
