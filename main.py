@@ -3,6 +3,7 @@
 # Prof. Guilherme Leal Santos
 #classes com hierarquia 10/10/2025
 #herença e renscrita de metodos. 10/10/2025
+#singleton 24/10/2025
 
 from conta import Conta
 from cliente import Cliente
@@ -10,34 +11,38 @@ from empresa.config.database import SupabaseConnection
 from funcionario.funcionario import Funcionario
 from funcionario.gerente import Gerente
 
+from empresa.config.database import SupabaseConnection
+
+client = SupabaseConnection().client
+
+
+
 
 
 # Aula 26/09 - Agregação, Composição, Modificadores de Acesso
 
-cliente1 = Cliente("Elvis Presley", "111.222.333-44")
-conta1 = Conta(cliente1, 1, 123, "elvis@gmail.com", 10000)
-print(Conta.total_contas())
+# cliente1 = Cliente("Elvis Presley", "111.222.333-44")
+# conta1 = Conta(cliente1, 1, 123, "elvis@gmail.com", 10000)
+# print(Conta.total_contas())
 
-cliente2 = Cliente("Jonhny Cage", "222.333.444-55")
-conta2 = Conta(cliente2, 2, 234, "jonhnny@outlook.com", 5000)
-print(Conta.total_contas())
+# cliente2 = Cliente("Jonhny Cage", "222.333.444-55")
+# conta2 = Conta(cliente2, 2, 234, "jonhnny@outlook.com", 5000)
+# print(Conta.total_contas())
 
-print(Conta.lista_contas()[0].saldo)
-print(Conta.lista_contas()[1].saldo)
-print(Conta.get_saldo_total())
+# print(Conta.lista_contas()[0].saldo)
+# print(Conta.lista_contas()[1].saldo)
+# print(Conta.get_saldo_total())
 
-print(Conta.total_contas_cm())
+# print(Conta.total_contas_cm())
 
-f = Funcionario("Val", "333.444.555-66", 5000)
-f.hobby = "Ler fanfic"
-print(f.hobby)
+# f = Funcionario("Val", "333.444.555-66", 5000)
+# f.hobby = "Ler fanfic"
+# print(f.hobby)
 
-g = Gerente("Joã maria", "444.555.666-77", 7000, 1234, 5)
-f.hobby = "Jogar kenshi"
-print(f.hobby)
+# g = Gerente("Joã maria", "444.555.666-77", 7000, 1234, 5)
+# f.hobby = "Jogar kenshi"
+# print(f.hobby)
 
-connection = SupabaseConnection()
-client = connection._client
 
 
 
