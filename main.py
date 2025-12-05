@@ -19,8 +19,11 @@ client = SupabaseConnection()._client
 #Criando o DAO para acessar a tabela funcionario
 funcionario_dao = FuncionarioDAO(client)
 
+# read ALL
 for funcionario in funcionario_dao.read_all():
     print(funcionario)
+    
+    
 
 
 
@@ -54,11 +57,9 @@ for funcionario in funcionario_dao.read_all():
 
 
 
-"""
-conta1.extrato()
-conta1.saca(500)
-conta1.deposita(300)
-"""
+
+####conta1.extrato()
+
 
 """
 conta2.extrato()

@@ -26,11 +26,22 @@ class BaseDAO(ABC, Generic[T]):
     def to_dict(self, model: T) -> dict:
         pass
     
-    # CRUD
+    # Fazer o CRUD
      
-    # Create
+    # Create - inaerir valores na tabela
      
-    # Read - retorna todos os valores da tabela
+    # Read 
+    def read(self, pk: str, value: T) -> Optional[T]: # optional = pode retornar um valor ou None
+        try:
+            response = self._client.table(self._table_name).select('*').eq(pk, value).execute() # eq = igual. tipo: pegue todos os registros onde pk = value
+            if response.data and len(response.data) > 0: #verifica se há dados na resposta
+                return self.to_model(response.data[0]) #retorna o primeiro registro encontrado
+            return None #nenhum registro encontrado
+        except Exception as e: #trata qualquer exceção que possa ocorrer durante a operação
+            print(f'Erro ao buscar registro: {e}') #mensagem de erro
+            return [] # retorna uma lista vazia em caso de erro
+        
+    # - retorna todos os valores da tabela
     def read_all(self) -> List[T]:
         try:
             response = self._client.table(self._table_name).select('*').execute()
@@ -40,7 +51,16 @@ class BaseDAO(ABC, Generic[T]):
         except Exception as e:
             print(f'Erro ao buascar todos os registros: {e}')
             return []
-    # Update
+        
+    # Update - o que tanto?
+    def update(self, pk: str, value: T, model: T) -> bool: # bool = retorna verdadeiro ou falso
+        try:
+            data_dict = self.to_dict(model) #converte o modelo em dicionário
+            response = self._client.table(self._table_name).update(data_dict).eq(pk, value).execute() # eq = onde pk = value, atualize com data_dict
+            return response.status_code == 200 #retorna True se a atualização foi bem-sucedida
+        except Exception as e:
+            print(f'Erro ao atualizar registro: {e}')
+            return False
      
     # Delete
     
