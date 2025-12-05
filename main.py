@@ -11,6 +11,7 @@ from empresa.config.database import SupabaseConnection
 from empresa.dao.funcionario_dao import FuncionarioDAO
 from funcionario.funcionario import Funcionario
 from funcionario.gerente import Gerente
+from empresa.models.funcionario import Funcionario as FuncionarioModel
 
 from empresa.config.database import SupabaseConnection
 
@@ -20,8 +21,68 @@ client = SupabaseConnection()._client
 funcionario_dao = FuncionarioDAO(client)
 
 # read ALL
-for funcionario in funcionario_dao.read_all():
-    print(funcionario)
+# for funcionario in funcionario_dao.read_all():
+#     print(funcionario)
+
+# Exemplo de Create (inserir um novo funcionário)
+from datetime import date
+
+novo_fun = FuncionarioModel(
+    "12345678900",
+    "Valzinha",
+    "Trajano",
+    date(1990, 1, 1),
+    "Natal-RN",
+    2500.0,
+    "f",
+    None,
+    None
+)
+
+criado = funcionario_dao.create(novo_fun)
+if criado:
+    print("Funcionário criado:", criado)
+else:
+    # caso já exista, informar
+    existente = funcionario_dao.read('cpf', novo_fun.cpf)
+    if existente:
+        print('Registro já existe:', existente)
+    else:
+        print("Falha ao criar funcionário")
+
+# --- Exemplo de Update ---
+target = criado if criado else funcionario_dao.read('cpf', novo_fun.cpf)
+if target:
+    print('\nTentando atualizar o registro...')
+    # modificar alguns campos
+    try:
+        target.endereco = 'Ponta Negra - Natal'
+        target.salario = float(target.salario) + 500.0
+    except Exception:
+        pass
+
+    atualizado = funcionario_dao.update('cpf', target.cpf, target)
+    if atualizado:
+        print('Registro atualizado:', atualizado)
+    else:
+        print('Falha ao atualizar o registro')
+
+# --- Exemplo de Delete ---
+if target:
+    print('\nTentando deletar o registro...')
+    apagou = funcionario_dao.delete('cpf', target.cpf)
+    if apagou:
+        print('Registro deletado com sucesso')
+    else:
+        print('Falha ao deletar (talvez já removido)')
+
+    # confirma leitura após deleção
+    conf = funcionario_dao.read('cpf', target.cpf)
+    print('Leitura pós-deleção:', conf)
+    
+
+
+    
     
     
 

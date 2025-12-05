@@ -28,7 +28,17 @@ class BaseDAO(ABC, Generic[T]):
     
     # Fazer o CRUD
      
-    # Create - inaerir valores na tabela
+    # Create 
+    def create(self, obj: T) -> Optional[T]:
+        try:
+            data = self.to_dict(obj)  # usa o conversor da subclasse para obter um dict serializável
+            response = self._client.table(self._table_name).insert(data).execute() # insere o dicionário na tabela
+            if response.data and len(response.data) > 0: #verifica se há dados na resposta
+                return self.to_model(response.data[0]) #retorna o primeiro registro inserido como um modelo
+            return None 
+        except Exception as e:
+            print(f"Erro ao criar registro: {e}")
+            return None
      
     # Read 
     def read(self, pk: str, value: T) -> Optional[T]: # optional = pode retornar um valor ou None
@@ -52,16 +62,25 @@ class BaseDAO(ABC, Generic[T]):
             print(f'Erro ao buascar todos os registros: {e}')
             return []
         
-    # Update - o que tanto?
-    def update(self, pk: str, value: T, model: T) -> bool: # bool = retorna verdadeiro ou falso
+    # Update 
+    def update(self, pk: str, value: str, obj: T) -> Optional[T]: #pk = nome do campo da chave primária | value = valor da chave primária | obj = objeto com os novos dados
         try:
-            data_dict = self.to_dict(model) #converte o modelo em dicionário
-            response = self._client.table(self._table_name).update(data_dict).eq(pk, value).execute() # eq = onde pk = value, atualize com data_dict
-            return response.status_code == 200 #retorna True se a atualização foi bem-sucedida
-        except Exception as e:
+            data = self.to_dict(obj)    #converte o objeto em um dicionário serializável
+            response = self._client.table(self._table_name).update(data).eq(pk, value).execute() #atualiza o registro onde pk = value
+            if response.data and len(response.data) > 0: # verifica se há dados na resposta
+                return self.to_model(response.data[0]) #retorna o registro atualizado como um modelo
+            return None #nenhum registro atualizado
+        except Exception as e: #
             print(f'Erro ao atualizar registro: {e}')
-            return False
+            return None
      
     # Delete
+    def delete(self, pk: str, value: str) -> bool: #pk = nome do campo da chave primária | value = valor da chave primária
+        try:
+            response = self._client.table(self._table_name).delete().eq(pk, value).execute() #deleta o registro onde pk = value
+            return len(response.data) > 0 #retorna True se algum registro foi deletado
+        except Exception as e:  # trata qualquer exceção que possa ocorrer durante a operação
+            print(f'Erro ao deletar registro: {e}') #mensagem de erro
+            return False #retorna False em caso de erro
     
     

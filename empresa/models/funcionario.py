@@ -19,23 +19,64 @@ class Funcionario:
 
     # Funcionario -> JSON (dict)
     def to_dict(self) -> dict:
-        return asdict(self)
+        def _to_iso(v):
+            if isinstance(v, (datetime, date)):
+                return v.isoformat()
+            return v
+
+        return {
+            'cpf': self._cpf,
+            'pnome': self._pnome,
+            'unome': self._unome,
+            'data_nasc': _to_iso(self._data_nasc),
+            'endereco': self._endereco,
+            'salario': self._salario,
+            'sexo': self._sexo,
+            'cpf_supervisor': self._cpf_supervisor,
+            'numero_departamento': self._numero_departamento,
+            'created_at': _to_iso(self._created_at) if self._created_at else None,
+            'updated_at': _to_iso(self._updated_at) if self._updated_at else None,
+        }
 
     # JSON (dict) -> Funcionario
     @classmethod
     def from_dict(self, data: dict) -> 'Funcionario':
+        dn = data.get('data_nasc')
+        if isinstance(dn, str):
+            try:
+                if 'T' in dn:
+                    dn = datetime.fromisoformat(dn)
+                else:
+                    dn = date.fromisoformat(dn)
+            except Exception:
+                pass
+
+        ca = data.get('created_at')
+        if isinstance(ca, str):
+            try:
+                ca = datetime.fromisoformat(ca)
+            except Exception:
+                ca = None
+
+        ua = data.get('updated_at')
+        if isinstance(ua, str):
+            try:
+                ua = datetime.fromisoformat(ua)
+            except Exception:
+                ua = None
+
         return Funcionario(
             data.get('cpf'),
             data.get('pnome'),
             data.get('unome'),
-            data.get('data_nasc'),
+            dn,
             data.get('endereco'),
             data.get('salario'),
             data.get('sexo'),
             data.get('cpf_supervisor'),
             data.get('numero_departamento'),
-            data.get('created_at'),
-            data.get('updated_at')
+            ca,
+            ua
         )
     
     def __str__(self) -> str:
